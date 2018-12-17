@@ -95,6 +95,55 @@ public class Picture extends SimplePicture {
 		}
 	}
 
+	public void keepOnlyBlue()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] rowArray : pixels) {
+			for (Pixel pixelObj : rowArray) {
+				pixelObj.setRed(0);
+				pixelObj.setGreen(0);
+			}
+		}
+	}
+
+	public void negate()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] rowArray : pixels) {
+			for (Pixel pixelObj : rowArray) {
+				pixelObj.setRed(255 - pixelObj.getRed() );
+				pixelObj.setGreen(255 - pixelObj.getGreen());
+				pixelObj.setBlue(255 - pixelObj.getBlue());
+			}
+		}
+	}
+
+	public void grayscale()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] rowArray : pixels) {
+			for (Pixel pixelObj : rowArray) {
+				int gray = (pixelObj.getRed()  + pixelObj.getBlue() + pixelObj.getGreen())/3;
+				pixelObj.setRed(gray);
+				pixelObj.setGreen(gray);
+				pixelObj.setBlue(gray);
+			}
+		}
+	}
+
+	public void fixUnderwater()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] rowArray : pixels) {
+			for (Pixel pixelObj : rowArray) {
+				//int gray = (pixelObj.getRed()  + pixelObj.getBlue() + pixelObj.getGreen())/3;
+				//pixelObj.setRed(0);
+				pixelObj.setGreen(pixelObj.getGreen()-100);
+				pixelObj.setBlue(pixelObj.getBlue()-100);
+			}
+		}
+	}
+
 	/**
 	 * Method that mirrors the picture around a vertical mirror in the center of
 	 * the picture from left to right
@@ -112,6 +161,7 @@ public class Picture extends SimplePicture {
 			}
 		}
 	}
+	
 
 	/** Mirror just part of a picture of a temple */
 	public void mirrorTemple() {
@@ -202,12 +252,14 @@ public class Picture extends SimplePicture {
 
 	/*
 	 * Main method for testing - each class in Java can have a main method
-	 */
+	
 	public static void main(String[] args) {
 		Picture beach = new Picture("beach.jpg");
+		//Picture p = new SimplePicture(); 
 		beach.explore();
 		beach.zeroBlue();
 		beach.explore();
 	}
+	*/
 
 } // this } is the end of class Picture, put all new methods before this
