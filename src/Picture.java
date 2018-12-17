@@ -215,7 +215,6 @@ public class Picture extends SimplePicture {
 			}
 		}
 	}
-	
 
 	/** Mirror just part of a picture of a temple */
 	public void mirrorTemple() {
@@ -233,6 +232,46 @@ public class Picture extends SimplePicture {
 				leftPixel = pixels[row][col];
 				rightPixel = pixels[row][mirrorPoint - col + mirrorPoint];
 				rightPixel.setColor(leftPixel.getColor());
+				count++;
+			}
+		}
+		System.out.println(count);
+	}
+
+	public void mirrorArms() {
+		int mirrorPoint = 200;
+		Pixel bottomPixel = null;
+		Pixel topPixel = null;
+		int count = 0;
+		Pixel[][] pixels = this.getPixels2D();
+		int height = pixels.length;
+		// loop through the rows
+		for (int col = 100; col < 300; col++) {
+			for (int row = 160; row < 195; row++) {
+				topPixel = pixels[row][col];
+				bottomPixel = pixels[mirrorPoint - row +mirrorPoint][col];
+				bottomPixel.setColor(topPixel.getColor());
+			}
+		}
+		System.out.println(count);
+	}
+
+	public void mirrorGull() {
+		int mirrorPoint = 230;
+		Pixel leftPixel = null;
+		Pixel rightPixel = null;
+		int count = 0;
+		Pixel[][] pixels = this.getPixels2D();
+
+		// loop through the rows
+		for (int row = 235; row < 320; row++) {
+			// loop from 13 to just before the mirror point
+			for (int col = 230; col < 340; col++) {
+
+				leftPixel = pixels[row][col];
+				rightPixel = pixels[row][mirrorPoint - col + mirrorPoint];
+				rightPixel.setColor(leftPixel.getColor());
+				count++;
 			}
 		}
 	}
