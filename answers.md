@@ -1,4 +1,2 @@
-Activity 6
-Questions
-1) It would run 90 times
-2) It would run 90 times
+Activity 7
+There are no questions for this section.
