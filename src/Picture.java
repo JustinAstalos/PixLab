@@ -303,6 +303,22 @@ public class Picture extends SimplePicture {
 		}
 	}
 
+	public void copy2(Picture fromPic, int startRow, int startCol, int startFromRow, int endFromRow, int startFromCol, int endFromCol) {
+		Pixel fromPixel = null;
+		Pixel toPixel = null;
+		Pixel[][] toPixels = this.getPixels2D();
+		Pixel[][] fromPixels = fromPic.getPixels2D();
+		for (int fromRow = startFromRow, toRow = startRow; fromRow < endFromRow
+				&& toRow < startRow+endFromRow; fromRow++, toRow++) {
+			for (int fromCol = startFromCol, toCol = startCol; fromCol < endFromCol
+					&& toCol < startCol+endFromCol; fromCol++, toCol++) {
+				fromPixel = fromPixels[fromRow][fromCol];
+				toPixel = toPixels[toRow][toCol];
+				toPixel.setColor(fromPixel.getColor());
+			}
+		}
+	}
+
 	/** Method to create a collage of several pictures */
 	public void createCollage() {
 		Picture flower1 = new Picture("flower1.jpg");
@@ -317,6 +333,26 @@ public class Picture extends SimplePicture {
 		this.copy(flower2, 500, 0);
 		this.mirrorVertical();
 		this.write("collage.jpg");
+	}
+
+	public void createCollage2() {
+		Picture seagull = new Picture("seagull.jpg");
+		Picture seagull2 = new Picture("seagull.jpg");
+		Picture flower2 = new Picture("flower2.jpg");
+		this.copy2(seagull, 0, 0,235,320,230,340);
+		seagull.grayscale();
+		this.copy2(seagull, 0, 100,235,320,230,340);
+		this.copy2(seagull2, 100, 100,235,320,230,340);
+		seagull2.zeroBlue();
+		this.copy2(seagull2, 100, 0,235,320,230,340);
+		flower2.mirrorHorizontal();
+		Picture flowerNegate = new Picture(flower2);
+		flowerNegate.negate();
+		this.copy(flowerNegate, 200, 0);
+		flower2.mirrorDiagonal();
+		this.copy(flower2, 300, 0);
+		this.mirrorVertical();
+		this.write("collage2.jpg");
 	}
 
 	/**
